@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="mt-5">Almost google</h1>
+        <h1 class="mt-5">Almost a google</h1>
         <SearchBar></SearchBar>
     </div>
 </template>

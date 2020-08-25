@@ -27,12 +27,14 @@
             </div>
         </div>
         <div class="col-md-7  search-bar" v-if="chosenItem">
-            <div class="card border-secondary  mb-3">
+            <div class="card border-secondary  mb-3 shadow">
                 <div class="card-header">{{chosenItem}}</div>
                 <div class="close" @click="closeResultWindow"></div>
                 <div class="card-body text-secondary ">
                     <h5 class="card-title">{{chosenItem}}</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, velit.</p>
+                    <p v-if="!chosenItem.startsWith('No data')" class="card-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, velit.
+                    </p>
                 </div>
             </div>
         </div>
@@ -83,6 +85,7 @@
                 this.resetAll()
             },
             searching: async function () {
+                this.closeResultWindow()
                 this.searchingInProgress = true
                 let tempData = await this.dummyData.filter(item => item.startsWith(this.typingWord)).sort()
                 this.resultArrayLength = tempData.length
@@ -118,9 +121,15 @@
     .search-options__item-active {
         background-color: #a0a0a0;
     }
+    .shadow{
+        -webkit-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.39);
+        -moz-box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.39);
+        box-shadow: 10px 10px 5px -5px rgba(0, 0, 0, 0.39);
+    }
 
     .search-options__item:hover {
         background-color: #e5e4e4;
+        cursor: pointer;
     }
 
     .close {
