@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-md-6  search-bar">
+        <div class="col-md-7  search-bar">
             <div class="input-group mb-3 mt-3">
                 <input type="text" class="form-control" placeholder="Search"
                        v-model="typingWord"
@@ -27,7 +27,14 @@
             </div>
         </div>
         <div class="col-md-7  search-bar" v-if="chosenItem">
-            <h3>{{chosenItem}}</h3>
+            <div class="card border-secondary  mb-3">
+                <div class="card-header">{{chosenItem}}</div>
+                <div class="close" @click="closeResultWindow"></div>
+                <div class="card-body text-secondary ">
+                    <h5 class="card-title">{{chosenItem}}</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem, velit.</p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -62,8 +69,6 @@
             },
             chooseByClick: function (event) {
                 this.chosenItem = this.data[event.index]
-                this.selectionWindowIsOpen = false
-                this.typingWord = ""
                 this.resetAll()
             },
             chooseByEnter: function () {
@@ -88,6 +93,9 @@
                 this.selectionWindowIsOpen = false
                 this.typingWord = ""
                 this.activeItem = -1
+            },
+            closeResultWindow: function () {
+                this.chosenItem = ""
             }
         },
     }
@@ -114,5 +122,33 @@
     .search-options__item:hover {
         background-color: #e5e4e4;
     }
+
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+        cursor: pointer;
+    }
+    .close:hover {
+        opacity: 1;
+    }
+    .close:before, .close:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 2px;
+        background-color: #333;
+    }
+    .close:before {
+        transform: rotate(45deg);
+    }
+    .close:after {
+        transform: rotate(-45deg);
+    }
+
 
 </style>
